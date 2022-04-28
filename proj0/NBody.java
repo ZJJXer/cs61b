@@ -12,7 +12,7 @@ public class NBody {
         return in.readDouble();
     }
 
-//I can't figure out why this way is wrong. Why?
+//I can't figure out why this way is wrong. The result is wrong!
 
 //    public static Planet[] readPlanets(String path) {
 //        In in = new In(path);
