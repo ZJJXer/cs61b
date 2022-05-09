@@ -35,16 +35,6 @@ public class ArrayDeque<T> {
     }
 
     private void resizeHelper(int capacity) {
-//        T[] a = (T []) new Object[capacity];
-//        if (nextFirst == 0) {
-//            System.arraycopy(items, 0, a, 0, size);
-//        }else {
-//            System.arraycopy(items, 0, a, 0, nextLast + 1);
-//            System.arraycopy(items, nextFirst, a, size + nextFirst, size - nextFirst);
-//            nextFirst = size + nextFirst;
-//        }
-//        items = a;
-
         T[] a = (T []) new Object[capacity];
         for (int i = 1; i < size + 1; i++) {
             nextFirst = Math.floorMod(nextFirst + 1, items.length);
@@ -122,6 +112,6 @@ public class ArrayDeque<T> {
         if (size < index + 1 || index <0) {
             return null;
         }
-        return items[Math.floorMod(nextFirst + index, items.length)];
+        return items[Math.floorMod(nextFirst + index + 1, items.length)];
     }
 }
