@@ -21,18 +21,18 @@ public class ArrayDeque<T> {
         if (size == items.length) {
             expand();
         }
-        if (size < items.length / 4) {
-            reduce();
-        }
+//        if (size < items.length / 4) {
+//            reduce();
+//        }
     }
 
     private void expand() {
         resizeHelper(items.length * 2);
     }
 
-    private void reduce() {
-        resizeHelper(items.length / 2);
-    }
+//    private void reduce() {
+//        resizeHelper(items.length / 2);
+//    }
 
     private void resizeHelper(int capacity) {
 //        T[] a = (T []) new Object[capacity];
