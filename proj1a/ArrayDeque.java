@@ -21,7 +21,7 @@ public class ArrayDeque<T> {
         if (size == items.length) {
             expand();
         }
-        if (size < items.length / 4 && items.length > 8) {
+        if (size < items.length / 4 && items.length > INITIAL_CAPACITY) {
             reduce();
         }
     }
@@ -46,12 +46,12 @@ public class ArrayDeque<T> {
 //        items = a;
 
         T[] a = (T []) new Object[capacity];
-        for (int i = 0; i < size; i++) {
+        for (int i = 1; i < size + 1; i++) {
             nextFirst = Math.floorMod(nextFirst + 1, items.length);
             a[i] = items[nextFirst];
         }
         nextFirst = 0;
-        nextLast = size - 1;
+        nextLast = size + 1;
         items = a;
     }
 
