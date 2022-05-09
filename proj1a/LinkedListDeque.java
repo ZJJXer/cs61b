@@ -30,12 +30,12 @@ public class LinkedListDeque<T> {
         size = 0;
     }
 
-    public LinkedListDeque(T x) {
-        sentinel = new Node(null, (T) new Object(), null);
-        sentinel.next = new Node(sentinel, x, sentinel);
-        sentinel.prev = sentinel.next;
-        size = 1;
-    }
+//    public LinkedListDeque(T x) {
+//        sentinel = new Node(null, (T) new Object(), null);
+//        sentinel.next = new Node(sentinel, x, sentinel);
+//        sentinel.prev = sentinel.next;
+//        size = 1;
+//    }
 
     /** Adds an item to the front of the list. */
     public void addFirst(T x) {
@@ -107,7 +107,7 @@ public class LinkedListDeque<T> {
         return getRecursive(sentinel.next, index);
     }
 
-    public T getRecursive(Node node, int i) {
+    private T getRecursive(Node node, int i) {
         if (i == 0) {
             return node.item;
         }

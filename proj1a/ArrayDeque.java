@@ -21,18 +21,18 @@ public class ArrayDeque<T> {
         if (size == items.length) {
             expand();
         }
-//        if (size < items.length / 4) {
-//            reduce();
-//        }
+        if (size < items.length / 4 && items.length > 8) {
+            reduce();
+        }
     }
 
     private void expand() {
         resizeHelper(items.length * 2);
     }
 
-//    private void reduce() {
-//        resizeHelper(items.length / 2);
-//    }
+    private void reduce() {
+        resizeHelper(items.length / 2);
+    }
 
     private void resizeHelper(int capacity) {
 //        T[] a = (T []) new Object[capacity];
@@ -44,14 +44,27 @@ public class ArrayDeque<T> {
 //            nextFirst = size + nextFirst;
 //        }
 //        items = a;
-        T[] a = (T []) new Object[capacity];
-        for (int i = 0; i < size; i++) {
-            nextFirst = Math.floorMod(nextFirst + 1, items.length);
-            a[i] = items[nextFirst];
-        }
+
+//        T[] a = (T []) new Object[capacity];
+//        for (int i = 0; i < size; i++) {
+//            nextFirst = Math.floorMod(nextFirst + 1, items.length);
+//            a[i] = items[nextFirst];
+//        }
+//        nextFirst = 0;
+//        nextLast = size - 1;
+//        items = a;
+        T[] temp = items;
+        int begin = Math.floorMod(nextFirst + 1, items.length);
+        int end = Math.floorMod(nextLast - 1, items.length);
+        items = (T[]) new Object[capacity];
         nextFirst = 0;
-        nextLast = size - 1;
-        items = a;
+        nextLast = 1;
+        for (int i=begin; i != end; i = Math.floorMod(i + 1, items.length)) {
+            items[nextLast] = temp[i];
+            nextLast = Math.floorMod(nextLast + 1, items.length);
+        }
+        items[nextLast] = temp[end];
+        nextLast = Math.floorMod(nextLast + 1, items.length);
     }
 
     public void addFirst(T x) {
@@ -92,11 +105,11 @@ public class ArrayDeque<T> {
         return res;
     }
 
-    public T getFirst() {
+    private T getFirst() {
         return items[Math.floorMod(nextFirst + 1, items.length)];
     }
 
-    public T getLast() {
+    private T getLast() {
         return items[Math.floorMod(nextLast - 1, items.length)];
     }
 
