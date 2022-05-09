@@ -112,6 +112,7 @@ public class ArrayDeque<T> {
         if (size < index + 1 || index <0) {
             return null;
         }
-        return items[Math.floorMod(nextFirst + index + 1, items.length)];
+//        return items[Math.floorMod(nextFirst + index + 1, items.length)];
+        return items[Math.floorMod(Math.floorMod(nextFirst + 1, items.length) + index, items.length)];
     }
 }
