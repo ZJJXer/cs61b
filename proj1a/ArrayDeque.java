@@ -34,6 +34,8 @@ public class ArrayDeque<T> {
         resizeHelper(items.length / 2);
     }
 
+    /**复制到新数组，nextFirst指向新数组的0，nextLast指向新数组的size + 1.
+     * floorMod()方法很妙，妙在floorMod(-1, 8) = 7，这样就实现了addFirst从头跳到尾。*/
     private void resizeHelper(int capacity) {
         T[] a = (T []) new Object[capacity];
         for (int i = 1; i < size + 1; i++) {
@@ -99,6 +101,8 @@ public class ArrayDeque<T> {
         return (size == 0 ? true : false);
     }
 
+    /** 当nextFirst == Math.floorMod(nextLast - 1, items.length) 时，
+     * nextFirst和nextLast其实是相邻的，这时候就停止循环了，最后一个item已经打印出来了。*/
     public void printDeque() {
         while (nextFirst != Math.floorMod(nextLast - 1, items.length)) {
             nextFirst = Math.floorMod(nextFirst + 1, items.length);
@@ -112,7 +116,6 @@ public class ArrayDeque<T> {
         if (size < index + 1 || index <0) {
             return null;
         }
-//        return items[Math.floorMod(nextFirst + index + 1, items.length)];
-        return items[Math.floorMod(Math.floorMod(nextFirst + 1, items.length) + index, items.length)];
+        return items[Math.floorMod(nextFirst + index + 1, items.length)];
     }
 }
