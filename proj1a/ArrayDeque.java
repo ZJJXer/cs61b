@@ -12,8 +12,8 @@ public class ArrayDeque<T> {
 
     public ArrayDeque() {
         items = (T []) new Object[INITIAL_CAPACITY];
-        nextFirst = 4;
-        nextLast = 5;
+        nextFirst = 0;
+        nextLast = 1;
         size = 0;
     }
 
@@ -45,26 +45,14 @@ public class ArrayDeque<T> {
 //        }
 //        items = a;
 
-//        T[] a = (T []) new Object[capacity];
-//        for (int i = 0; i < size; i++) {
-//            nextFirst = Math.floorMod(nextFirst + 1, items.length);
-//            a[i] = items[nextFirst];
-//        }
-//        nextFirst = 0;
-//        nextLast = size - 1;
-//        items = a;
-        T[] temp = items;
-        int begin = Math.floorMod(nextFirst + 1, items.length);
-        int end = Math.floorMod(nextLast - 1, items.length);
-        items = (T[]) new Object[capacity];
-        nextFirst = 0;
-        nextLast = 1;
-        for (int i=begin; i != end; i = Math.floorMod(i + 1, items.length)) {
-            items[nextLast] = temp[i];
-            nextLast = Math.floorMod(nextLast + 1, items.length);
+        T[] a = (T []) new Object[capacity];
+        for (int i = 0; i < size; i++) {
+            nextFirst = Math.floorMod(nextFirst + 1, items.length);
+            a[i] = items[nextFirst];
         }
-        items[nextLast] = temp[end];
-        nextLast = Math.floorMod(nextLast + 1, items.length);
+        nextFirst = 0;
+        nextLast = size - 1;
+        items = a;
     }
 
     public void addFirst(T x) {
